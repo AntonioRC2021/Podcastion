@@ -1,0 +1,26 @@
+<div class=" styledNav ">
+    <nav class="styledDiv">
+        <a class="aStyled" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> <span class="spanStyled"> HOME</span></a>
+        <a class="aStyled"> <span class="spanStyled">SEARCH</span></a>
+        <a class="aStyled"><span class="spanStyled">WATCHLIST</span></a>
+        <a class="aStyled"><span class="spanStyled">PODCASTS</span></a>
+
+    </nav>
+    <div class="">
+        <ng-container *ngIf="(currentUser$ | async) === null">
+            <a routerLink="/account/login" class="styledLogin mr-2">Login</a>
+            <a routerLink="/account/register" class="styledLogin ">Sign up</a>
+        </ng-container>
+
+        <ng-container *ngIf="currentUser$ | async">
+            <div class="dropdown ml-3 mr-5" dropdown>
+                <a class="dropdown-toggle" style="cursor: pointer;" dropdownToggle><strong> Welcome {{(currentUser$ | async).displayName}}</strong></a>
+                <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
+                    <a (click)="logout()" class="dropdown-item d-flex align-items-center py-2">
+                        <i class="fa fa-sign-out mr-3"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
